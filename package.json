@@ -10,13 +10,31 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "^3.9.3",
-    "typescript": "^5.3.3",
-    "vue": "^3.4.14",
-    "vue-router": "^4.2.5"
+    "@nuxt/icon": "^1.10.3",
+    "@nuxt/types": "^2.18.1",
+    "autoprefixer": "^10.4.20",
+    "nuxt": "^3.15.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   },
   "dependencies": {
-    "keycloak-js": "^23.0.4",
-    "remeda": "^1.38.0"
+    "@nuxt/eslint": "^0.7.4",
+    "@nuxt/fonts": "^0.10.3",
+    "@nuxt/ui": "^2.20.0",
+    "@nuxt/ui-pro": "^1.6.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "@nuxtjs/fontaine": "^0.4.4",
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@nuxtjs/i18n": "9.1.1",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/nuxt": "^0.9.0",
+    "@vueuse/nuxt": "^12.3.0",
+    "keycloak-js": "^26.0.7",
+    "nuxt-icon": "1.0.0-beta.7",
+    "pinia": "^2.3.0",
+    "remeda": "^2.19.0"
   }
 }
