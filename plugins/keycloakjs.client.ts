@@ -1,47 +1,65 @@
-/**
- * Keycloak.js support for Nuxt.
- * 
- * Note that this plugin should only work at the client side.
- */
+import Keycloak from 'keycloak-js';
+import { omit } from 'remeda';
 
-import Keycloak from "keycloak-js";
-import { omit } from "remeda";
+const KEYCLOAK_PARAMS = ['state', 'session_state', 'code'];
 
-// Query parameters used by Keycloak.
-const KEYCLOAK_PARAMS = [
-  "state",
-  "session_state",
-  "code",
-]
+function getRelativeRoute(route: string) {
+  return `${window.location.origin}/${route}`;
+}
 
 const plugin = defineNuxtPlugin({
-  name: "keycloakjs",
-  enforce: "pre",
+  name: 'keycloakjs',
+  enforce: 'pre',
   hooks: {
-    // This hook fixes https://github.com/keycloak/keycloak/issues/14742
-    "app:mounted"() {
+    'app:mounted'() {
       const router = useRouter();
-
-      // Filter query parameters. Remove query parameters used by Keycloak.
-      // (you can use you own logic here)
       const query = omit(router.currentRoute.value.query, KEYCLOAK_PARAMS);
       router.replace({ query });
     },
   },
-  async setup() {
+  async setup(nuxtApp) {
     const config = useRuntimeConfig();
     try {
+      console.log('กำลังเริ่มต้น Keycloak...');
+      console.log('Keycloak URL:', config.public.keycloakUrl);
+      console.log('Keycloak Realm:', config.public.keycloakRealm);
+      console.log('Keycloak Client ID:', config.public.keycloakClientId);
+
       const keycloak = new Keycloak({
         url: config.public.keycloakUrl,
         realm: config.public.keycloakRealm,
         clientId: config.public.keycloakClientId,
       });
-      await keycloak.init({
-        onLoad: "check-sso",
-        // Optional
-        silentCheckSsoRedirectUri: location.origin + "/silent-check-sso.html",
-        responseMode: "query",
+
+      console.log('การตั้งค่า Keycloak:', {
+        url: config.public.keycloakUrl,
+        realm: config.public.keycloakRealm,
+        clientId: config.public.keycloakClientId,
       });
+
+      keycloak.init({
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri: getRelativeRoute('silent-check-sso.html'),
+      })
+      .then((authenticated) => {
+        if (authenticated) {
+          console.log('Authenticated');
+        } else {
+          console.error('Keycloak authentication failed');
+        }
+      })
+      .catch((err) => {
+        console.error('Error initializing Keycloak:', err);
+        throw createError({ statusCode: 500, message: `Keycloak initialization error: ${err.message}` });
+      });
+      
+
+      if (keycloak.authenticated) {
+        console.log('Authenticated');
+        // คุณสามารถเก็บข้อมูล user หรือทำการ redirect ได้ที่นี่
+      } else {
+        console.error('Keycloak authentication failed');
+      }
 
       return {
         provide: {
@@ -49,8 +67,8 @@ const plugin = defineNuxtPlugin({
         },
       };
     } catch (e) {
-      console.error(e)
-      throw createError({ statusCode: 401, message: "Keycloak error" });
+      console.error('ข้อผิดพลาดในการเริ่มต้น Keycloak:', e);
+      throw createError({ statusCode: 401, message: 'Keycloak error' });
     }
   },
 });

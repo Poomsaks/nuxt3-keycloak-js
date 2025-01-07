@@ -3,9 +3,9 @@ export default defineNuxtConfig({
   // devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      keycloakUrl: "http://localhost:8080/auth",
-      keycloakRealm: "my-realm",
-      keycloakClientId: "app",
+      keycloakUrl: "https://iam.pointit.co.th",
+      keycloakRealm: "pointit",
+      keycloakClientId: "fe",
     },
   },
 

@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
-
 <body>
   <script>
+    console.log("silent-check-sso running...");
+    console.log("Location.href: ", location.href);
+    console.log("Location.origin: ", location.origin);
     parent.postMessage(location.href, location.origin);
   </script>
 </body>
-
 </html>
