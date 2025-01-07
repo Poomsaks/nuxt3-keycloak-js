@@ -38,14 +38,14 @@ function onSubmit() {
         >
           <template #description>
             {{ $t('haveAccount') }}
-            <NuxtLink to="/live" class="text-primary font-medium">
+            <NuxtLink to="/protected" class="text-primary font-medium">
               {{ $t('signUp') }}
             </NuxtLink>
           </template>
 
           <template #footer>
             {{ $t('agreement') }}
-            <NuxtLink to="/settings" class="text-primary font-medium">
+            <NuxtLink to="/protected" class="text-primary font-medium">
               {{ $t('termsOfService') }}
             </NuxtLink>
           </template>

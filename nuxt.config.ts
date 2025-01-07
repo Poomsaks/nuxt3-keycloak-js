@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  // devtools: { enabled: true },
+  extends: ['@nuxt/ui-pro'],
   ssr: false,
   devtools: { enabled: true },
   devServer: {
@@ -36,10 +36,7 @@ export default defineNuxtConfig({
     '~/plugins/fetch.ts',
     '~/plugins/keycloak.client.ts',
   ],
-  extends: ['@nuxt/ui-pro'],
-  eslint: {
-    fix: true // Make sure this is set to true
-  },
+
   ui: {
     // icons: ['heroicons', 'simple-icons'],
     safelistColors: ['primary', 'red', 'orange', 'green']
@@ -76,17 +73,17 @@ export default defineNuxtConfig({
   typescript: {
     strict: false
   },
-  vite: {
-    css: {
-      postcss: false
+  // vite: {
+  //   css: {
+  //     postcss: false
+  //   }
+  // },
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: 'never',
+        braceStyle: '1tbs'
+      }
     }
   }
-  // eslint: {
-  //   config: {
-  //     stylistic: {
-  //       commaDangle: 'never',
-  //       braceStyle: '1tbs'
-  //     }
-  //   }
-  // }
 })

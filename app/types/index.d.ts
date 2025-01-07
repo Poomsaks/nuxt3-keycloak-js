@@ -74,6 +74,13 @@ export interface UserData {
     lastName: string
     token: string | undefined
     refreshToken: string | undefined
+    districts: array | undefined
+    permissions: array | undefined
+    role: string | undefined
+    token: string | undefined
+    refreshToken: string | undefined
+    avatar: string | undefined
+    locale: string | 'th'
 }
 
 

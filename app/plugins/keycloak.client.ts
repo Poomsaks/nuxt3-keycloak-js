@@ -1,8 +1,8 @@
 // plugins/keycloak.client.ts
 import { defineNuxtPlugin, useRuntimeConfig, navigateTo, useNuxtApp } from '#app'
 import Keycloak from 'keycloak-js'
-import { useAuthStore } from '../stores/auth'
-import { useStateStore } from '../stores/auth/state' // Import state store
+import { useAuthStore } from '~/stores/auth'
+// import { useStateStore } from '../stores/auth/state' // Import state store
 import type { UserData } from '~/types'
 
 function getRelativeRoute(route: string) {
